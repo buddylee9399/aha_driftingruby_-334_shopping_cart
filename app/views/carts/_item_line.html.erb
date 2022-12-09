@@ -1,0 +1,30 @@
+<%= content_tag :div, class: "row mb-8 align-items-center", id: dom_id(cart_item) do %>
+  <div class="align-self-stretch col-12 col-lg-3 mb-4 mb-md-0">
+    <%= image_tag cart_item.product.image, class: "img-fluid", style: "max-width: 100px" %>
+  </div>
+  <div class="col-12 col-md-9">
+    <div class="d-flex justify-content-between">
+      <div class="pe-2">
+        <h3 class="mb-2 lead fw-bold"><%= cart_item.product.name %></h3>
+      </div>
+      <div>
+        <span class="lead text-info fw-bold"><%= number_to_currency(cart_item.product.price) %></span>
+        <%= button_to "remove",
+          carts_remove_path, 
+          class: "btn btn-danger",
+          params: { product: cart_item.product },
+          method: :delete %>
+      </div>
+    </div>
+    <div class="d-flex align-items-center justify-content-between">
+      <div></div>
+      <div class="d-inline-flex align-items-center px-4 fw-bold text-secondary border rounded-2">
+        <%= button_to "-", carts_reduce_path, params: { product: cart_item.product }, class: "btn px-0 py-2" %>
+        <div class="form-control m-0 px-2 py-4 text-center text-md-end border-0">
+          <%= render "carts/item_quantity", cart_item: cart_item %>
+        </div>
+        <%= button_to "+", carts_add_path, params: { product: cart_item.product }, class: "btn px-0 py-2" %>
+      </div>
+    </div>
+  </div>
+<% end %>

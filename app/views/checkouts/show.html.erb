@@ -1,0 +1,26 @@
+<%= turbo_stream_from current_cart %>
+<div class="py-16 px-6 px-md-14 bg-white">
+  <div class="d-flex mb-12 align-items-center">
+    <h3 class="mb-0">Order summary</h3>
+    <span class="flex-shrink-0 d-inline-flex ms-4 align-items-center justify-content-center rounded-circle bg-primary text-white" style="width: 32px; height: 32px;">
+      <%= render "carts/item_count", count: current_cart.quantity %>
+    </span>
+  </div>
+ <div class="mb-12 pb-16 border-bottom">
+    <% current_cart.cart_items.each do |cart_item| %>
+      <%= render "carts/item_line", cart_item: cart_item %>
+    <% end %>
+  </div>
+  <div class="mb-12">
+    <div class="mb-10">
+      <div class="py-3 px-10 rounded-pill">
+     		<div class="d-flex justify-content-between">
+          <span class="lead fw-bold" data-config-id="row4">Total</span>
+          <%= render "carts/total_price" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a class="btn btn-primary w-100 text-uppercase" href="#" data-config-id="primary-action">Confirm Order</a>
+</div>

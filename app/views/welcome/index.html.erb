@@ -1,0 +1,69 @@
+<%= turbo_stream_from current_cart %>
+<%= render "carts/checkout_button" %>
+
+<div class="row">
+  <div class="col-12 col-lg-3">
+    <%= turbo_frame_tag "filtering" do %>
+      <div class="h3">Filtering</div>
+      <%= form_for :search, url: search_path do |f| %>
+        <div class="input-group mb-3">
+          <%= f.text_field :query, class: "form-control" %>
+          <%= f.submit "Search", class: "btn btn-outline-secondary" %>
+        </div>
+
+        <%= f.select :sort, [
+            ["Price Low to High", :price_lth],
+            ["Price High to Low", :price_htl]
+          ], { include_blank: true },
+          class: "form-select mb-3" %>
+
+
+        <div class="h4">Price</div>
+        <ul class="list-group mb-3">
+
+          <li class="list-group-item">
+            <div class="form-check">
+              <%= f.check_box :price, { multiple: true, class: "form-check-input" } ,
+                "lt1000", nil %>
+              <%= f.label :price, "< $1000", class: "form-check-label" %>
+            </div>
+          </li>
+
+          <li class="list-group-item">
+            <div class="form-check">
+              <%= f.check_box :price, { multiple: true, class: "form-check-input" } ,
+                "bewteen1000and2500", nil %>
+              <%= f.label :price, "$1000 - $2500", class: "form-check-label" %>
+            </div>
+          </li>
+
+          <li class="list-group-item">
+            <div class="form-check">
+              <%= f.check_box :price, { multiple: true, class: "form-check-input" } ,
+                "gt2500", nil %>
+              <%= f.label :price, "> $2500", class: "form-check-label" %>
+            </div>
+          </li>
+
+        </ul>
+
+        <div class="h4">Category</div>
+        <ul class="list-group mb-3">
+          <% Category.all.each do |category| %>
+            <li class="list-group-item">
+              <div class="form-check">
+                <%= f.check_box :category_id, { multiple: true, class: "form-check-input" } ,
+                  category.id, nil %>
+                <%= f.label :category_id, category.name, class: "form-check-label" %>
+              </div>
+            </li>
+           <% end %>
+        </ul>
+
+      <% end %>
+    <% end %>
+  </div>
+  <div class='col-12 col-lg-9'>
+    <%= render "products/display", products: @products %>
+  </div>
+</div>

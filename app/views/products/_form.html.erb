@@ -1,0 +1,25 @@
+<%= form_with(model: product) do |form| %>
+  <div class="mb-3">
+    <%= form.label :name, class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :price, class: 'form-label' %>
+    <%= form.text_field :price, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :category_id, class: 'form-label' %>
+    <%= form.text_field :category_id, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :image, class: 'form-label' %>
+    <%= form.file_field :image, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>

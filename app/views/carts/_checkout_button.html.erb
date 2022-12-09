@@ -1,0 +1,8 @@
+<div class="mb-3">
+  <%= link_to checkout_path, class: "btn btn-outline-dark" do %>
+    <div class="badge bg-primary">
+      <%= render "carts/item_count", count: current_cart.quantity %>
+    </div>
+    Checkout
+  <% end %>
+</div>
